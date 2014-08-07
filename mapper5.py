@@ -34,8 +34,10 @@ for row in reader:
 			abs_parent_id = 0;
 		else:	
 			abs_parent_id = (row[7])		
-		chars = [',','!','.',';','?','[',']','<','>','/','-','\t','<p>','</p>','<ul>','<li>','\\','"',"(",")","_",'*',':']
-		body = row[4].translate(None, ''.join(chars)).strip().split(" ")
+		body_temp = row[4].replace('</p>', "?").replace('\n', '?').replace('\N', '?').replace('<p>', '?').replace('<ul>', '?').replace('</ul>', '?').replace('<li>', '?').replace('</li>', '?')
+		chars = [',','!','.',';','?','[',']','<','>','/','-','\t','\\','"',"(",")","_",'*',':','&', '%']
+			
+		body = body_temp.translate(None, ''.join(chars)).strip().split()
 		
 		
 		node_type = row[5]
